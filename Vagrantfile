@@ -5,14 +5,18 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure("2") do |config|
+VAGRANT_API_VERSION=2
+Vagrant.configure(VAGRANT_API_VERSION) do |config|
+  # Use the same key for each machine
+  config.ssh.insert_key = false
+  
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "centos/7"
+  #config.vm.box = "centos/7"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -69,4 +73,13 @@ Vagrant.configure("2") do |config|
      yum -y update --skip-broken
      shutdown -r now
   SHELL
+  config.vm.define "vagrant1" do |vagrant1|
+    vagrant1.vm.box = "centos/7"
+  end
+  config.vm.define "vagrant2" do |vagrant2|
+    vagrant2.vm.box = "centos/7"
+  end
+  config.vm.define "vagrant3" do |vagrant3|
+    vagrant3.vm.box = "centos/7"
+  end
 end
