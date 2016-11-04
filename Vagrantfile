@@ -75,11 +75,14 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
   SHELL
   config.vm.define "vagrant1" do |vagrant1|
     vagrant1.vm.box = "centos/7"
+    vagrant1.vm.network "private_network", ip: "192.168.33.11"
   end
   config.vm.define "vagrant2" do |vagrant2|
     vagrant2.vm.box = "centos/7"
+    vagrant2.vm.network "private_network", ip: "192.168.33.12"
   end
   config.vm.define "vagrant3" do |vagrant3|
     vagrant3.vm.box = "centos/7"
+    vagrant3.vm.network "private_network", ip: "192.168.33.13"
   end
 end
