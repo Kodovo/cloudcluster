@@ -73,20 +73,20 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
      yum -y update --skip-broken
      shutdown -r now
   SHELL
-  config.vm.define "admin" do |admin|
-    admin.vm.box = "centos/7"
-    admin.vm.network "private_network", ip: "191.168.33.10"
+  config.vm.define "frontend" do |frontend|
+    frontend.vm.box = "centos/7"
+    frontend.vm.network "private_network", ip: "191.168.33.10"
   end
-  config.vm.define "vagrant1" do |vagrant1|
-    vagrant1.vm.box = "centos/7"
-    vagrant1.vm.network "private_network", ip: "192.168.33.11"
+  config.vm.define "compute1" do |compute1|
+    compute1.vm.box = "centos/7"
+    compute1.vm.network "private_network", ip: "192.168.33.11"
   end
-  config.vm.define "vagrant2" do |vagrant2|
-    vagrant2.vm.box = "centos/7"
-    vagrant2.vm.network "private_network", ip: "192.168.33.12"
+  config.vm.define "compute2" do |compute2|
+    compute2.vm.box = "centos/7"
+    compute2.vm.network "private_network", ip: "192.168.33.12"
   end
-  config.vm.define "vagrant3" do |vagrant3|
-    vagrant3.vm.box = "centos/7"
-    vagrant3.vm.network "private_network", ip: "192.168.33.13"
+  config.vm.define "compute3" do |compute3|
+    compute3.vm.box = "centos/7"
+    compute3.vm.network "private_network", ip: "192.168.33.13"
   end
 end
