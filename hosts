@@ -2,6 +2,6 @@
 frontend ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
 
 [nodes]
-compute1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200
-compute2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201
-compute3 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2202
+node001 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200
+node002 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201
+node003 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2202

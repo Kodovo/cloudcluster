@@ -77,16 +77,16 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     frontend.vm.box = "centos/7"
     frontend.vm.network "private_network", ip: "191.168.33.10"
   end
-  config.vm.define "compute1" do |compute1|
-    compute1.vm.box = "centos/7"
-    compute1.vm.network "private_network", ip: "192.168.33.11"
+  config.vm.define "node001" do |node001|
+    node001.vm.box = "centos/7"
+    node001.vm.network "private_network", ip: "192.168.33.11"
   end
-  config.vm.define "compute2" do |compute2|
-    compute2.vm.box = "centos/7"
-    compute2.vm.network "private_network", ip: "192.168.33.12"
+  config.vm.define "node002" do |node002|
+    node002.vm.box = "centos/7"
+    node002.vm.network "private_network", ip: "192.168.33.12"
   end
-  config.vm.define "compute3" do |compute3|
-    compute3.vm.box = "centos/7"
-    compute3.vm.network "private_network", ip: "192.168.33.13"
+  config.vm.define "node003" do |node003|
+    node003.vm.box = "centos/7"
+    node003.vm.network "private_network", ip: "192.168.33.13"
   end
 end
