@@ -73,6 +73,10 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
      yum -y update --skip-broken
      shutdown -r now
   SHELL
+  config.vm.define "admin" do |admin|
+    admin.vm.box = "centos/7"
+    admin.vm.network "private_network", ip: "191.168.33.10"
+  end
   config.vm.define "vagrant1" do |vagrant1|
     vagrant1.vm.box = "centos/7"
     vagrant1.vm.network "private_network", ip: "192.168.33.11"
