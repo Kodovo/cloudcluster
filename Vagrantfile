@@ -65,17 +65,13 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
 
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-     yum clean all
-     yum -y update --skip-broken
-     shutdown -r now
-  SHELL
+  # Enable provisioning with an ansible playbook. Additional
+  # provisioners such as Puppet, Chef, shell, Salt, and Docker are
+  # also available. Please see the documentation for more information
+  # about their specific syntax and use.
   config.vm.define "frontend" do |frontend|
     frontend.vm.box = "centos/7"
-    frontend.vm.network "private_network", ip: "191.168.33.10"
+    frontend.vm.network "private_network", ip: "192.168.33.10"
   end
   config.vm.define "node001" do |node001|
     node001.vm.box = "centos/7"
@@ -88,5 +84,9 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
   config.vm.define "node003" do |node003|
     node003.vm.box = "centos/7"
     node003.vm.network "private_network", ip: "192.168.33.13"
+    node003.vm.provision "ansible" do |ansible|
+      ansible.limit = 'all'
+      ansible.playbook = "provision.yml"
+    end
   end
 end

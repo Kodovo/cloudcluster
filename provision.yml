@@ -1,0 +1,15 @@
+#!/usr/bin/ansible-playbook
+
+---
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: upgrade all packages
+    yum: name=* state=latest update_cache=yes
+    become: true
+
+  - name: restart machine
+    command: /sbin/shutdown -r +1 "First reboot"
+    ignore_errors: true
+    become: true
