@@ -13,3 +13,11 @@
     command: /sbin/shutdown -r +1 "First reboot"
     ignore_errors: true
     become: true
+
+- hosts: frontend
+  remote_user: root
+
+  tasks:
+  - name: install Apache
+    yum: name=httpd state=latest
+    become: true

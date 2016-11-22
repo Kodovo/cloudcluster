@@ -87,6 +87,10 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     node003.vm.provision "ansible" do |ansible|
       ansible.limit = 'all'
       ansible.playbook = "provision.yml"
+      ansible.groups = {
+        "frontend" => ["frontend"],
+        "nodes" =>    ["node001", "node002", "node003"]
+      }
     end
   end
 end
