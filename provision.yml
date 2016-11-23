@@ -35,6 +35,7 @@
     with_items:
     - httpd
     - graphite-web
+    - python-carbon
     become: true
 
 
