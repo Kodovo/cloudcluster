@@ -33,7 +33,6 @@
   - name: install packages
     yum: name={{ item }} state=latest
     with_items:
-    - httpd
     - graphite-web
     - python-carbon
     become: true
@@ -42,13 +41,16 @@
     copy: src=graphite-web.conf dest=/etc/httpd/conf.d/graphite-web.conf
     become: true
 
-  - name: set graphite-web page dir attributes
+  - name: set graphite-web page and runtime lib directory attributes
     file:
-      path: /usr/share/graphite/webapp
+      path: "{{ item }}"
       owner: apache
       group: apache
       recurse: yes
       state: directory
+    with_items:
+    - /usr/share/graphite/webapp
+    - /var/lib/graphite
     become: true
 
   - name: set graphite-web wsgi file attributes
@@ -57,15 +59,6 @@
       owner: apache
       group: apache
       state: file
-    become: true
-
-  - name: set graphite /var/lib file attributes
-    file:
-      path: /var/lib/graphite
-      owner: apache
-      group: apache
-      recurse: yes
-      state: directory
     become: true
 
   - name: run graphite setup scripts
