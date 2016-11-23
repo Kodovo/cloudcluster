@@ -1,23 +1,50 @@
 #!/usr/bin/ansible-playbook
 
 ---
+# First the common first time thingies for all machines
+
 - hosts: all
   remote_user: root
 
   tasks:
+  - name: copy the EPEL gpg key
+    copy: src=RPM-GPG-KEY-EPEL-7 dest=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 owner=root group=root
+    become: true
+
+  - name: Add EPEL repository
+    yum_repository:
+      name: epel
+      description: EPEL YUM repo
+      baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+      gpgcheck: yes
+      gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    become: true
+
   - name: upgrade all packages
     yum: name=* state=latest update_cache=yes
     become: true
 
-  - name: restart machine
-    command: /sbin/shutdown -r +1 "First reboot"
-    ignore_errors: true
-    become: true
+# Then more special stuff for groups of machines
 
 - hosts: frontend
   remote_user: root
 
   tasks:
-  - name: install Apache
-    yum: name=httpd state=latest
+  - name: install packages
+    yum: name={{ item }} state=latest
+    with_items:
+    - httpd
+    - graphite-web
+    become: true
+
+
+# And the final common things for all
+
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: restart machine
+    command: /sbin/shutdown -r +1 "First reboot"
+    ignore_errors: true
     become: true
