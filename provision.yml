@@ -50,7 +50,7 @@
       state: directory
     with_items:
     - /usr/share/graphite/webapp
-    - /var/lib/graphite
+    - /var/lib/graphite-web
     become: true
 
   - name: set graphite-web wsgi file attributes
@@ -66,6 +66,11 @@
     with_items:
     - /usr/bin/graphite-build-index
     - /usr/bin/graphite-manage syncdb --noinput
+    become: true
+    become_user: apache
+
+  - name: enable httpd
+    service: name=httpd enabled=yes
     become: true
 
 # And the final common things for all
