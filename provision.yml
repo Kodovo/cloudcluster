@@ -42,23 +42,14 @@
     become: true
 
   - name: set graphite-web page and runtime lib directory attributes
-    file:
-      path: "{{ item }}"
-      owner: apache
-      group: apache
-      recurse: yes
-      state: directory
+    file: path="{{ item }}" owner=apache group=apache recurse=yes state=directory
     with_items:
     - /usr/share/graphite/webapp
     - /var/lib/graphite-web
     become: true
 
   - name: set graphite-web wsgi file attributes
-    file:
-      path: /usr/share/graphite/graphite-web.wsgi
-      owner: apache
-      group: apache
-      state: file
+    file: path=/usr/share/graphite/graphite-web.wsgi owner=apache group=apache state=file
     become: true
 
   - name: run graphite setup scripts
